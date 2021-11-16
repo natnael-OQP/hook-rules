@@ -1,82 +1,59 @@
 import Head from 'next/head'
+import React, { useState,useEffect } from 'react';
 
 export default function Home() {
+  const [counter, setCounter] = useState(0)
+  const [input,setInput] = useState('')
+  const add = () => {
+    setCounter(counter+1)
+  }
+  // 
+  const sub = () => {
+    setCounter(counter-1)
+  }
+  // useEffect without dependency  update all ways 
+useEffect(() => {
+    console.log("i render");
+  })
+// useEffect with empty dependency update once once
+useEffect(() => {
+    console.log("i render once "); 
+  }, [])
+  
+// useEffect without dependency update when the dependency is change
+useEffect(() => {
+  console.log("I render all the way the dependency is changed ");
+},[input])
+
+
+
+
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
+    <div className="min-h-screen p-4 bg-gray-400 ">
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
-
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="p-3 font-mono text-lg bg-gray-100 rounded-md">
-            pages/index.js
-          </code>
-        </p>
-
-        <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
+      <div className="flex flex-col justify-around  h-20 max-w-lg mx-auto mt-3 " >
+        <input
+          value={counter}
+          onChange={(e)=>setInput(e.target.value)}
+          className="outline-none rounded-md p-2  text-indigo-500 font-medium " type="text" />
+        <div className="flex items-center w-25 justify-center mt-3 " >
           <a
-            href="https://nextjs.org/docs"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and API.
-            </p>
-          </a>
-
+            onClick={sub}
+            className=" cursor-pointer select-none bg-blue-500 px-4 py-2 rounded-md shadow-md hover:bg-blue-400 " type="button" >sub</a>
           <a
-            href="https://nextjs.org/learn"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+            onClick={add}
+            className=" cursor-pointer select-none inline-block mx-2 bg-blue-500 px-4 py-2 rounded-md shadow-md hover:bg-blue-400 " type="button" >add</a>
         </div>
-      </main>
+      </div>
 
-      <footer className="flex items-center justify-center w-full h-24 border-t">
-        <a
-          className="flex items-center justify-center"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="h-4 ml-2" />
-        </a>
-      </footer>
     </div>
   )
 }
+
+/*
+
+T-shaped developer is   They have a strong skill-set in a specific area, The vertical bar of the T refers to expert experience and understanding of a particular area, while the top of the T refers to an ability to collaborate with experts from other disciplines, gaining even greater understanding and knowledge from this collaboration.
+*/
