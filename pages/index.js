@@ -3,9 +3,13 @@ import React, { useState,useEffect } from 'react';
 
 export default function Home() {
   const [counter, setCounter] = useState(0)
-  const [input,setInput] = useState('')
+  const [input, setInput] = useState('')
+  const [windowWidth, setWindowWidth] = useState();
   const add = () => {
     setCounter(counter+1)
+  }
+  const handelWidth = () => {
+    setWindowWidth(window.innerWidth);
   }
   // 
   const sub = () => {
@@ -13,8 +17,9 @@ export default function Home() {
   }
   // useEffect without dependency  update all ways 
 useEffect(() => {
-    console.log("i render");
-  })
+  window.addEventListener('resize', handelWidth)
+  console.log("I render");
+  },[])
 // useEffect with empty dependency update once once
 useEffect(() => {
     console.log("i render once "); 
@@ -47,13 +52,10 @@ useEffect(() => {
             onClick={add}
             className=" cursor-pointer select-none inline-block mx-2 bg-blue-500 px-4 py-2 rounded-md shadow-md hover:bg-blue-400 " type="button" >add</a>
         </div>
+        <h1 className="text-indigo-600 text-xl font-bold pt-2 " >window width : <span className="text-red-500" >{windowWidth}</span> </h1>
       </div>
 
     </div>
   )
 }
 
-/*
-
-T-shaped developer is   They have a strong skill-set in a specific area, The vertical bar of the T refers to expert experience and understanding of a particular area, while the top of the T refers to an ability to collaborate with experts from other disciplines, gaining even greater understanding and knowledge from this collaboration.
-*/
