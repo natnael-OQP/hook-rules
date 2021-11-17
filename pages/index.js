@@ -18,8 +18,12 @@ export default function Home() {
   // useEffect without dependency  update all ways 
 useEffect(() => {
   window.addEventListener('resize', handelWidth)
-  console.log("I render");
-  },[])
+  // cleanup the function
+  return () => {
+    window.removeEventListener('resize', handelWidth);
+  }
+})
+
 // useEffect with empty dependency update once once
 useEffect(() => {
     console.log("i render once "); 
