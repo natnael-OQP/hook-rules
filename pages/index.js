@@ -1,19 +1,43 @@
 import Head from 'next/head'
 import React, { useState,useEffect } from 'react';
+import useRandomJoke from '../customHook/useRandomjoke';
 
 export default function Home() {
+  // custom Hook
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  
+  const joke = useRandomJoke(firstName, lastName);
+
+  const GenerateJock = (e) => {
+    e.preventDefault()
+  }
+
   return (
-    <div className="min-h-screen p-4 bg-gray-400 ">
+    <div className="min-h-screen p-4 bg-green-300 ">
       <Head>
         <title>Hooks</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="flex flex-col justify-around items-center  h-50 max-w-lg mx-auto mt-3 " >
-        <h1 className="text-2xl px-8 font-bold pb-4 text-red-500 " >Generate Jocks </h1>
-          <a
+      <h1 className="text-2xl px-8 font-bold pb-4 text-red-500 " >Generate jokes </h1>
+        <form>
+          <input
+            value={firstName}
+            onChange={(e)=>setFirstName(e.target.value)}
+            className="m-2 outline-none p-2 text-black rounded-md shadow-sm " placeholder="first name" type="text" />
+          <input
+            value={lastName}
+            onChange={(e)=>setLastName(e.target.value)}
+            className="m-2 outline-none p-2 text-black rounded-md shadow-sm " placeholder="last name" type="text" />
+        </form>
+        <a
+          onClick={GenerateJock}
+          type="submit"
           className=" cursor-pointer select-none  bg-blue-500 px-8 py-2 text-white rounded-md shadow-md hover:bg-blue-400 " type="button"
-        >jocks</a>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat, dolores. Optio non blanditiis excepturi consequuntur eos, veniam quaerat minima hic veritatis? Sed repellendus deserunt iure voluptates non. Soluta, atque nobis?</p>
+        >jokes</a>
+        <p className="text-red-400 text-lg font-semibold pt-4 " >{joke}</p>
         </div>
       </div>
   )
