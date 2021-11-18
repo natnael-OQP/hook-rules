@@ -1,9 +1,11 @@
 import Head from 'next/head'
-import React, { useState,useEffect } from 'react';
+import React, { useState,useRef } from 'react';
 import useRandomJoke from '../customHook/useRandomjoke';
 
 export default function Home() {
   // custom Hook
+  const firstNameRef = useRef(null);
+  const lastNameRef = useRef(null);
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -12,6 +14,8 @@ export default function Home() {
 
   const GenerateJock = (e) => {
     e.preventDefault()
+    setFirstName(firstNameRef.current.value)
+    setLastName(lastNameRef.current.value)
   }
 
   return (
@@ -24,12 +28,10 @@ export default function Home() {
       <h1 className="text-2xl px-8 font-bold pb-4 text-red-500 " >Generate jokes </h1>
         <form>
           <input
-            value={firstName}
-            onChange={(e)=>setFirstName(e.target.value)}
+            ref={firstNameRef}
             className="m-2 outline-none p-2 text-black rounded-md shadow-sm " placeholder="first name" type="text" />
           <input
-            value={lastName}
-            onChange={(e)=>setLastName(e.target.value)}
+            ref={lastNameRef}
             className="m-2 outline-none p-2 text-black rounded-md shadow-sm " placeholder="last name" type="text" />
         </form>
         <a
